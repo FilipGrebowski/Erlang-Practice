@@ -1,7 +1,7 @@
 -module(practice).
--export([triArea/3, maxThree/3, beat/1, lose/1, result/2]).
+-export([triArea/3, maxThree/3, beat/1, lose/1]).
 
-% Calculates a traingle area with three sides.
+% Calculates a traingle area.
 triArea(A, B, C) ->
 	S = (A + B + C)/2,
 	math:sqrt(S * (S - A) * (S - B) * (S - C)).
