@@ -1,5 +1,5 @@
 -module(practice).
--export([triArea/3, maxThree/3, beat/1, lose/1]).
+-export([triArea/3, maxThree/3, howManyEqual/3, beat/1, lose/1, pieces/1]).
 
 % Calculates a traingle area.
 triArea(A, B, C) ->
@@ -12,22 +12,33 @@ maxThree(A, B, C) ->
 	max(A, max(B, C)).
 
 
+% How many equal
+howManyEqual(X, X, X) -> 3;
+howManyEqual(Y, X, X) -> 2;
+howManyEqual(X, X, Y) -> 2;
+howManyEqual(X, Y, X) -> 2;
+howManyEqual(_, _, _) -> 0.
+
+
 % Rock, papper and scissors game.
-beat(X) when X == rock ->
-	paper;
-beat(X) when X == paper ->
-	scissors;
-beat(X) when X == scissors ->
-	rock;
-beat(X) when X =/= rock andalso X =/= paper andalso X =/= scissors ->
-	io:fwrite("Incorrect option. ").
+beat(rock) -> paper;
+beat(paper) -> scissors;
+beat(scissors) -> rock;
+beat(_) -> incorrect.
+
+lose(rock) -> scissors;
+lose(paper) -> rock;
+lose(scissors) -> paper;
+lose(_) -> incorrect.
+
+% A defined function 'pieces' which tells you the maximum number
+% of pieces into which you can cut a piece of paper with N cuts.
+pieces(0) ->
+	1;
+pieces(1) ->
+	2;
+pieces(N) ->
+	N + pieces(N - 1).
 
 
-lose(X) when X == rock ->
-	scissors;
-lose(X) when X == paper ->
-	rock;
-lose(X) when X == scissors ->
-	paper;
-lose(X) when X =/= rock andalso X =/= paper andalso X =/= scissors ->
-	io:fwrite("Incorrect option. ").
+
