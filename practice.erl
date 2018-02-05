@@ -1,5 +1,5 @@
 -module(practice).
--export([triArea/3, maxThree/3, howManyEqual/3, beat/1, lose/1, pieces/1, doubleAll/1]).
+-export([triArea/3, maxThree/3, howManyEqual/3, beat/1, lose/1, pieces/1, doubleAll/1, evens/1, index/2, merge/2]).
 
 % Calculates a traingle area.
 triArea(A, B, C) ->
@@ -12,11 +12,11 @@ maxThree(A, B, C) ->
 	max(A, max(B, C)).
 
 
-% How many equal
+% How many numbers passed as an argument are equal?
 howManyEqual(X, X, X) -> 3;
-howManyEqual(Y, X, X) -> 2;
-howManyEqual(X, X, Y) -> 2;
-howManyEqual(X, Y, X) -> 2;
+howManyEqual(_Y, X, X) -> 2;
+howManyEqual(X, X, _Y) -> 2;
+howManyEqual(X, _Y, X) -> 2;
 howManyEqual(_, _, _) -> 0.
 
 
@@ -41,11 +41,65 @@ pieces(N) ->
 	N + pieces(N - 1).
 
 
-% Doubling all the numbers in a list
+% Doubling all the numbers in a list.
 doubleAll([]) ->
 	[];
 doubleAll([X|Xs]) ->
 	[X * 2 | doubleAll(Xs)].
+
+
+% Returning all the even numbers
+evens([]) ->
+	[];
+evens([X|Xs]) when X rem 2 == 0 ->
+	[X | evens(Xs)];
+evens([_|Xs]) ->
+	evens(Xs).
+
+
+% Get an element from the list at index N.
+index(0, [X|Xs]) ->
+	X;
+index(N, [X|Xs]) when N > 0 ->
+	index(N - 1, Xs).
+
+
+% Merging two lists together.
+% merge([], [Y|Ys]) ->
+% 	[Y|Ys];
+% merge([X|Xs], []) ->
+% 	[X|Xs];
+merge(Xs, []) ->
+	Xs;
+merge([], Ys) ->
+	Ys;
+merge([X|Xs], [Y|Ys]) when X =< Y ->
+	[X | merge(Xs, [Y|Ys])];
+merge([X|Xs], [Y|Ys]) ->
+	[Y | merge([X|Xs], Ys)].
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
