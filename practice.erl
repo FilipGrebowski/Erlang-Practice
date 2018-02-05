@@ -1,5 +1,5 @@
 -module(practice).
--export([triArea/3, maxThree/3, howManyEqual/3, beat/1, lose/1, pieces/1]).
+-export([triArea/3, maxThree/3, howManyEqual/3, beat/1, lose/1, pieces/1, doubleAll/1]).
 
 % Calculates a traingle area.
 triArea(A, B, C) ->
@@ -39,6 +39,13 @@ pieces(1) ->
 	2;
 pieces(N) ->
 	N + pieces(N - 1).
+
+
+% Doubling all the numbers in a list
+doubleAll([]) ->
+	[];
+doubleAll([X|Xs]) ->
+	[X * 2 | doubleAll(Xs)].
 
 
 
