@@ -1,5 +1,5 @@
 -module(practice).
--export([triArea/3, maxThree/3, howManyEqual/3, beat/1, lose/1, pieces/1, doubleAll/1, evens/1, index/2, merge/2]).
+-export([triArea/3, maxThree/3, howManyEqual/3, beat/1, lose/1, pieces/1, doubleAll/1, evensOne/1, evensTwo/1, index/2, merge/2, mergeSort/2]).
 
 % Calculates a traingle area.
 triArea(A, B, C) ->
@@ -49,12 +49,22 @@ doubleAll([X|Xs]) ->
 
 
 % Returning all the even numbers
-evens([]) ->
+evensOne([]) ->
 	[];
-evens([X|Xs]) when X rem 2 == 0 ->
-	[X | evens(Xs)];
-evens([_|Xs]) ->
-	evens(Xs).
+evensOne([X|Xs]) when X rem 2 == 0 ->
+	[X | evensOne(Xs)];
+evensOne([_|Xs]) ->
+	evensOne(Xs).
+
+% Another way of returning all the even numbers in a list
+% can be written as follows using cases.
+evensTwo([]) ->
+	[];
+evensTwo([X|Xs]) ->
+	case X rem 2 == 0 of
+		true -> [X | evensTwo(Xs)];
+		_    -> evensTwo(Xs)
+	end.
 
 
 % Get an element from the list at index N.
@@ -65,10 +75,6 @@ index(N, [X|Xs]) when N > 0 ->
 
 
 % Merging two lists together.
-% merge([], [Y|Ys]) ->
-% 	[Y|Ys];
-% merge([X|Xs], []) ->
-% 	[X|Xs];
 merge(Xs, []) ->
 	Xs;
 merge([], Ys) ->
@@ -79,18 +85,11 @@ merge([X|Xs], [Y|Ys]) ->
 	[Y | merge([X|Xs], Ys)].
 	
 
-
-
-
-
-
-
-
-
-
-
-
-
+% Split the list into two separate lists, sort each half separately,
+% and then join the list together in sorted order.
+% NOT COMPLETE
+mergeSort(N, [X|Xs]) ->
+	{As, Bs} = lists:split(N, [X|Xs]).
 
 
 
