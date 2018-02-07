@@ -1,5 +1,5 @@
 -module(practice).
--export([triArea/3, maxThree/3, howManyEqual/3, beat/1, lose/1, pieces/1, doubleAll/1, evensOne/1, evensTwo/1, index/2, merge/2, mergeSort/2]).
+-export([triArea/3, maxThree/3, howManyEqual/3, beat/1, lose/1, pieces/1, doubleAll/1, evensOne/1, evensTwo/1, index/2, merge/2, mergeSort/1, stars/1, build/2, maximum/1, member/2, greater/2]).
 
 % Calculates a traingle area.
 triArea(A, B, C) ->
@@ -87,12 +87,56 @@ merge([X|Xs], [Y|Ys]) ->
 
 % Split the list into two separate lists, sort each half separately,
 % and then join the list together in sorted order.
-% NOT COMPLETE
-mergeSort(N, [X|Xs]) ->
-	{As, Bs} = lists:split(N, [X|Xs]).
+mergeSort([]) -> [];
+mergeSort([X]) -> [X];
+mergeSort(Xs) ->
+	{As, Bs} = lists:split(length(Xs) div 2, Xs),
+	Sorted_As = mergeSort(As),
+	Sorted_Bs = mergeSort(Bs),
+	merge(Sorted_As, Sorted_Bs).
 
 
+% a function that takes an integer N and prints a 
+% row of N stars, followed by a carriage return.
+stars(0) ->
+	io:format("~n");
+stars(N) ->
+	io:format("*"), stars(N-1).
 
+
+% a function that builds a list so for example if you 
+% give it two arguments e.g. build(2, 5), it will build 
+% a list as such: [2, 3, 4, 5].
+build(X, X) ->
+	[X];
+build(N, M) ->
+	[N | build(N+1, M)].
+
+
+% give the maximum number from an unordered list.
+maximum([]) ->
+	0;
+maximum([X]) ->
+	X;
+maximum([X|Xs]) ->
+	max(X, maximum(Xs)).
+
+
+% find if the number N entered as an argument appears
+% in the given list.
+member(X, []) -> false;
+member(X, [X|Xs]) -> true;
+member(X, [Y|Ys]) -> member(X, Ys).
+
+
+% given the number N, select only the numbers in a list
+% greater than that number.
+greater(N, []) -> [];
+greater(N, [X|Xs]) ->
+	case X > N of
+		true -> [X | greater(N, Xs)];
+		_    -> greater(N, Xs)
+	end.
 
 
 
