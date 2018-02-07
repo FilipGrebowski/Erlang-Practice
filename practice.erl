@@ -1,5 +1,7 @@
 -module(practice).
--export([triArea/3, maxThree/3, howManyEqual/3, beat/1, lose/1, pieces/1, doubleAll/1, evensOne/1, evensTwo/1, index/2, merge/2, mergeSort/1, stars/1, build/2, maximum/1, member/2, greater/2]).
+-export([triArea/3, maxThree/3, howManyEqual/3, beat/1, lose/1, pieces/1, 
+	    doubleAll/1, evensOne/1, evensTwo/1, index/2, merge/2, mergeSort/1, 
+	    stars/1, build/2, maximum/1, member/2, greater/2]).
 
 % Calculates a traingle area.
 triArea(A, B, C) ->
@@ -101,7 +103,7 @@ mergeSort(Xs) ->
 stars(0) ->
 	io:format("~n");
 stars(N) ->
-	io:format("*"), stars(N-1).
+	io:format("*"), stars(N - 1).
 
 
 % a function that builds a list so for example if you 
@@ -110,7 +112,7 @@ stars(N) ->
 build(X, X) ->
 	[X];
 build(N, M) ->
-	[N | build(N+1, M)].
+	[N | build(N + 1, M)].
 
 
 % give the maximum number from an unordered list.
@@ -137,9 +139,6 @@ greater(N, [X|Xs]) ->
 		true -> [X | greater(N, Xs)];
 		_    -> greater(N, Xs)
 	end.
-
-
-
 
 
 
